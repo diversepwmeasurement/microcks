@@ -1,68 +1,45 @@
-# Welcome new users by creating a comment in the first time issue/PR.
-# Adding a friendly message in the comment to tip non-stargazers to star our repo.
-#
-# Props to https://github.com/wow-actions/welcome 
-
-name: Welcome New Users with Thanks and Tip non-stargazers ;-)
-on:
-  pull_request_target:
-    types: [opened, closed]
-  issues:
-    types: [opened]
 jobs:
   run:
-    # Do not run on bots and maintainers
-    if: ${{ !contains(fromJson('["dependabot[bot]", "dependabot-preview[bot]", "allcontributors[bot]"]'), github.actor) }}
-    runs-on: ubuntu-latest
+    if: ${{ !contains(fromJson('["dependabot[bot]", "dependabot-preview[bot]", "allcontributors[bot]"]'),
+      github.actor) }}
+    runs-on: self-hosted
     steps:
-      #- uses: wow-actions/welcome@v1
-      - uses: wow-actions/welcome@72817eb31cda1de60f51893d80e2e82ce57f7e76 # To pin v1.3.0 
-        with:
-          # GitHub token as default GITHUB_TOKEN
-      
-          FIRST_ISSUE_REACTIONS: '+1, hooray, rocket, heart'
-          
-          FIRST_ISSUE: |
-            👋 @{{ author }}
-            
-            Welcome to the Microcks community! 💖
-            
-            Thanks and congrats 🎉 for opening your first issue here! Be sure to follow the issue template or please update it accordingly.
-            
-            📢 If you're using Microcks in your organization, please [add your company name to this list](https://github.com/microcks/.github/blob/main/ADOPTERS.md). 🙏 It really helps the project to gain momentum and credibility. It's a small contribution back to the project with a big impact.
-            
-            If you need to know why and how to add yourself to the list, please read the blog post ["Join the Microcks Adopters list and Empower the vibrant open source Community 🙌"](https://microcks.io/blog/join-adopters-list/)
-            
-            Hope you have a great time there! 
-          
-          FIRST_PR_REACTIONS: '+1, hooray, rocket, heart'
-          
-          FIRST_PR: |
-            👋 @{{ author }}
-            
-            Welcome to the Microcks community! 💖
-            
-            Thanks and congrats 🎉 for opening your first pull request here! Be sure to follow the pull request template or please update it accordingly.
-            
-            Hope you have a great time there! 
-          
-          FIRST_PR_MERGED: |
-            🎉 @{{ author }}
-            
-            You are now a Microcks community contributor! 💖
-            
-            Thanks and congrats 🚀 on merging your first pull request! We are delighted and very proud of you! 👏 
-            
-            📢 If you're using Microcks in your organization, please [add your company name to this list](https://github.com/microcks/.github/blob/main/ADOPTERS.md). 🙏 It really helps the project to gain momentum and credibility. It's a small contribution back to the project with a big impact.
-            
-            If you need to know why and how to add yourself to the list, please read the blog post ["Join the Microcks Adopters list and Empower the vibrant open source Community 🙌"](https://microcks.io/blog/join-adopters-list/)
-            
-            Kudos and please keep going, we need you 🙌
-            
-          STAR_MESSAGE: |
-            🌟 ~~~~~~~~~ 🌟
-
-            📢 If you like Microcks, please ⭐ star ⭐ our repo to support it!
-            
-            🙏 It really helps the project to gain momentum and credibility. It's a small contribution back to the project with a big impact.
-            
+    - continue-on-error: true
+      uses: wow-actions/welcome@72817eb31cda1de60f51893d80e2e82ce57f7e76
+      with:
+        FIRST_ISSUE: "\U0001F44B @{{ author }}\n\nWelcome to the Microcks community!\
+          \ \U0001F496\n\nThanks and congrats \U0001F389 for opening your first issue\
+          \ here! Be sure to follow the issue template or please update it accordingly.\n\
+          \n\U0001F4E2 If you're using Microcks in your organization, please [add\
+          \ your company name to this list](https://github.com/microcks/.github/blob/main/ADOPTERS.md).\
+          \ \U0001F64F It really helps the project to gain momentum and credibility.\
+          \ It's a small contribution back to the project with a big impact.\n\nIf\
+          \ you need to know why and how to add yourself to the list, please read\
+          \ the blog post [\"Join the Microcks Adopters list and Empower the vibrant\
+          \ open source Community \U0001F64C\"](https://microcks.io/blog/join-adopters-list/)\n\
+          \nHope you have a great time there! \n"
+        FIRST_ISSUE_REACTIONS: +1, hooray, rocket, heart
+        FIRST_PR: "\U0001F44B @{{ author }}\n\nWelcome to the Microcks community!\
+          \ \U0001F496\n\nThanks and congrats \U0001F389 for opening your first pull\
+          \ request here! Be sure to follow the pull request template or please update\
+          \ it accordingly.\n\nHope you have a great time there! \n"
+        FIRST_PR_MERGED: "\U0001F389 @{{ author }}\n\nYou are now a Microcks community\
+          \ contributor! \U0001F496\n\nThanks and congrats \U0001F680 on merging your\
+          \ first pull request! We are delighted and very proud of you! \U0001F44F\
+          \ \n\n\U0001F4E2 If you're using Microcks in your organization, please [add\
+          \ your company name to this list](https://github.com/microcks/.github/blob/main/ADOPTERS.md).\
+          \ \U0001F64F It really helps the project to gain momentum and credibility.\
+          \ It's a small contribution back to the project with a big impact.\n\nIf\
+          \ you need to know why and how to add yourself to the list, please read\
+          \ the blog post [\"Join the Microcks Adopters list and Empower the vibrant\
+          \ open source Community \U0001F64C\"](https://microcks.io/blog/join-adopters-list/)\n\
+          \nKudos and please keep going, we need you \U0001F64C\n"
+        FIRST_PR_REACTIONS: +1, hooray, rocket, heart
+        STAR_MESSAGE: "\U0001F31F ~~~~~~~~~ \U0001F31F\n\n\U0001F4E2 If you like Microcks,\
+          \ please \u2B50 star \u2B50 our repo to support it!\n\n\U0001F64F It really\
+          \ helps the project to gain momentum and credibility. It's a small contribution\
+          \ back to the project with a big impact.\n"
+name: Welcome New Users with Thanks and Tip non-stargazers ;-)
+on:
+  repository_dispatch:
+    types: trigger-ga___welcome-new-users.yml
